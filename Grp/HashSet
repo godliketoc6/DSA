@@ -94,21 +94,4 @@ public class HashSet<T> {
 
         return table[index] != null && table[index].contains(element);
     }
-
-    public static void main(String[] args) {
-        HashSet<String> stringHashSet = new HashSet<>();
-
-        // Adding elements
-        stringHashSet.add("apple");
-        stringHashSet.add("banana");
-        stringHashSet.add("cherry");
-
-        // Removing an element
-        stringHashSet.remove("banana");
-
-        // Checking if an element is present
-        System.out.println("Is 'apple' present? " + stringHashSet.contains("apple"));    // Output: true
-        System.out.println("Is 'banana' present? " + stringHashSet.contains("banana"));  // Output: false
-        System.out.println("Is 'cherry' present? " + stringHashSet.contains("cherry"));  // Output: true
-    }
 }
