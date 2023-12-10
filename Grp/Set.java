@@ -1,5 +1,6 @@
-// This is a set implementaion using Linked List in Java
-public class LinkedListSet<T> {
+package DSA.Grp;
+
+public class Set<T> {
     static class Node<T> {
         T data;
         Node<T> next;
@@ -12,14 +13,14 @@ public class LinkedListSet<T> {
 
     Node<T> head;
 
-    public LinkedListSet() {
+    public Set() {
         this.head = null;
     }
 
     public boolean isEmpty() {
         return head == null;
     }
-    
+
     // Add new data to the end of the set
     public void add(T data) {
         if (contains(data)) {
@@ -41,7 +42,7 @@ public class LinkedListSet<T> {
     }
 
     public boolean contains(T data) {
-        //LOOP THROUGH LIST TO CHECK FOR ELEMENT
+        // LOOP THROUGH LIST TO CHECK FOR ELEMENT
         Node<T> current = head;
         while (current != null) {
             if (current.data.equals(data)) {
@@ -73,7 +74,7 @@ public class LinkedListSet<T> {
         previous.next = current.next;
     }
 
-    //Size
+    // Size
     public int size() {
         int count = 0;
         Node<T> current = head;
@@ -87,8 +88,8 @@ public class LinkedListSet<T> {
     public void clear() {
         Node<T> current = head;
         while (current != null) {
-           remove(current.data);
-           current = current.next;
+            remove(current.data);
+            current = current.next;
         }
         if (this.isEmpty()) {
             System.out.println("Set clear successful");
@@ -116,12 +117,11 @@ public class LinkedListSet<T> {
     }
 
     public static void main(String[] args) {
-    LinkedListSet<Integer> mySet = new LinkedListSet<Integer>();
-    mySet.add(1);
-    mySet.add(10);
-    mySet.add(5);
-    mySet.add(2);
-    System.out.println(mySet);
-
+        Set<Integer> mySet = new Set<Integer>();
+        mySet.add(1);
+        mySet.add(10);
+        mySet.add(5);
+        mySet.add(2);
+        System.out.println(mySet);
     }
 }

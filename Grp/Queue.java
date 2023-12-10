@@ -1,11 +1,13 @@
-public class ArrayQueue {
+package DSA.Grp;
+
+public class Queue {
     private static final int MAX_SIZE = 100;
     private int[] queueArray;
     private int front;
     private int rear;
     private int size;
 
-    public ArrayQueue() {
+    public Queue() {
         this.queueArray = new int[MAX_SIZE];
         this.front = 0;
         this.rear = -1;
@@ -46,11 +48,10 @@ public class ArrayQueue {
     }
 
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue();
+        Queue queue = new Queue();
         queue.enqueue(1);
         queue.enqueue(2);
         queue.enqueue(3);
-
         System.out.println("Dequeued item: " + queue.dequeue());
         System.out.println("Dequeued item: " + queue.dequeue());
         System.out.println("Queue size: " + queue.size());

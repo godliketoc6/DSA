@@ -1,3 +1,5 @@
+package DSA.Grp;
+
 class Node<T> {
     T data;
     Node<T> next;
@@ -7,53 +9,12 @@ class Node<T> {
     }
 }
 
-class LinkedList<T> {
-    private Node<T> head;
-
-    public void add(T data) {
-        Node<T> newNode = new Node<>(data);
-        newNode.next = head;
-        head = newNode;
-    }
-
-    public boolean contains(T data) {
-        Node<T> current = head;
-
-        while (current != null) {
-            if (current.data.equals(data)) {
-                return true;
-            }
-            current = current.next;
-        }
-
-        return false;
-    }
-
-    public void remove(T data) {
-        if (head == null) {
-            return;
-        }
-
-        if (head.data.equals(data)) {
-            head = head.next;
-            return;
-        }
-
-        Node<T> current = head;
-        while (current.next != null && !current.next.data.equals(data)) {
-            current = current.next;
-        }
-
-        if (current.next != null) {
-            current.next = current.next.next;
-        }
-    }
-}
-
 public class HashSet<T> {
     private static final int DEFAULT_CAPACITY = 10;
+    private static final int MAX_SIZE = 100; // Set your desired max size
     private LinkedList<T>[] table;
     private int capacity;
+    private int size;
 
     public HashSet() {
         this(DEFAULT_CAPACITY);
@@ -69,6 +30,11 @@ public class HashSet<T> {
     }
 
     public void add(T element) {
+        if (size >= MAX_SIZE) {
+            // Handle case where maximum size is reached
+            return;
+        }
+
         int index = hashFunction(element);
 
         if (table[index] == null) {
@@ -78,6 +44,7 @@ public class HashSet<T> {
         LinkedList<T> bucket = table[index];
         if (!bucket.contains(element)) {
             bucket.add(element);
+            size++;
         }
     }
 
@@ -86,6 +53,7 @@ public class HashSet<T> {
 
         if (table[index] != null) {
             table[index].remove(element);
+            size--;
         }
     }
 
@@ -93,5 +61,28 @@ public class HashSet<T> {
         int index = hashFunction(element);
 
         return table[index] != null && table[index].contains(element);
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public static void main(String[] args) {
+        HashSet<Integer> myHashSet = new HashSet<>();
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+        myHashSet.add(4);
+        myHashSet.add(5);
+
+        // Print the elements in the HashSet
+        System.out.println("HashSet contains elements:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Element " + i + ": " + myHashSet.contains(i));
+        }
+
+        // Print the size of the HashSet
+        System.out.println("Size of HashSet: " + myHashSet.size());
     }
 }
