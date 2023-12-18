@@ -1,4 +1,4 @@
-package DSA.Grp;
+
 
 public class SecretKey {
     private String correctKey;
@@ -6,7 +6,7 @@ public class SecretKey {
 
     public SecretKey() {
         // for the real test, your program will not know this
-        correctKey = "CHAMOMOCHAHA";
+        correctKey = "OAOCHMHHMCOA";
         counter = 0;
     }
 
