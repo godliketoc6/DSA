@@ -12,7 +12,15 @@ public class SecretKeyGuesser {
         int match = key.guess(currentGuess); // Make a guess and get the number of characters that match the secret key
         int oldMatch = match; // Store the initial number of matching characters
 
-        printResult(match, currentGuess); // Call the checkGuess method
+        if(match == -1) { // If the guess is invalid
+            System.out.println("Invalid key! Please enter a correct key with 12 letters!"); // Print an error message
+            return; // Exit the function
+        }
+    
+        if (match == 12) { // If all characters match the secret key
+            System.out.println("I found the secret key, it's: " + currentGuess); // Print the secret key
+            return; // Exit the function
+        }
 
         char[] currentGuessArray = currentGuess.toCharArray(); // Convert the current guess string to a character array
 
@@ -87,21 +95,5 @@ public class SecretKeyGuesser {
         if (match == 12) {
             System.out.println("I found the secret key! It's: " + currentGuess);
         }
-    }
-
-    /**
-     * This function checks the guess made by the user against a secret key.
-     * If the guess is invalid, it prints an error message.
-     * If all characters in the guess match the secret key, it prints the secret
-     * key.
-     * 
-     * @param match        The number of characters that match the secret key.
-     * @param currentGuess The current guess made by the user.
-     */
-    public static void printResult(int match, String currentGuess) {
-        // Check if the guess is invalid
-        System.out.println(match == -1 ? "Invalid key! Please enter a correct key with 12 letters!" :
-        // Check if all characters match the secret key
-                (match == 12 ? "I found the secret key, it's: " + currentGuess : ""));
     }
 }
