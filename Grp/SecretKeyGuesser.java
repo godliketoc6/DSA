@@ -1,86 +1,128 @@
 public class SecretKeyGuesser {
+/**
+ * Start the guessing process for the secret key.
+ */
+public void start() {
+    // Set the possible characters for the secret key
+    char[] possible = { 'M', 'O', 'C', 'H', 'A' };
 
-    /**
-     * Runs a guessing algorithm to find the secret key.
-     */
+    // Initialize the index for replacing characters in the current guess
+    int index = 1;
 
-    public void start() {
-        char[] possible = { 'M', 'O', 'C', 'H', 'A' }; // Define the possible characters for the secret key
-        int index = 1; // Initialize the index for replacing characters in the current guess
-        SecretKey key = new SecretKey(); // Create an instance of the SecretKey class
-        String currentGuess = "MMMMMMMMMMMM"; // Initialize the current guess
-        int match = key.guess(currentGuess); // Make a guess and get the number of characters that match the secret key
-        int oldMatch = match; // Store the initial number of matching characters
+    // Create a new instance of the SecretKey class
+    SecretKey key = new SecretKey();
 
-        if(match == -1) { // If the guess is invalid
-            System.out.println("Invalid key! Please enter a correct key with 12 letters!"); // Print an error message
-            return; // Exit the function
-        }
-    
-        if (match == 12) { // If all characters match the secret key
-            System.out.println("I found the secret key, it's: " + currentGuess); // Print the secret key
-            return; // Exit the function
-        }
+    // Initialize the current guess string with all 'M' characters
+    String currentGuess = "MMMMMMMMMMMM";
 
-        char[] currentGuessArray = currentGuess.toCharArray(); // Convert the current guess string to a character array
+    // Make an initial guess and store the number of matches
+    int match = key.guess(currentGuess);
 
-        int i = 0; // Initialize the loop counter
-        while (i < currentGuess.length()) { // Loop until all characters in the current guess have been checked
-            char currentChar = currentGuess.charAt(i); // Get the current character at index i
+    // Store the initial number of matches for reference
+    int oldMatch = match;
 
-            replaceChar(currentGuessArray, possible, i, index); // Replace the current character with a possible
-                                                                // character at index i and index value
+    // Initialize the loop counter
+    int i = 0;
 
-            currentGuess = String.valueOf(currentGuessArray); // Convert the character array back to a string
+    // Perform the initial check for the current guess
+    checkMatch(currentGuess, match, key);
 
-            match = key.guess(currentGuess); // Make a guess with the updated current guess
+    // Convert the current guess string to a character array
+    char[] currentGuessArray = currentGuess.toCharArray();
 
-            System.out.println("Guessing: " + currentGuess); // Print the current guess
+    // Continue guessing until all characters have been checked
+    while (i < currentGuess.length()) {
+        // Get the current character at the specified index
+        char currentChar = currentGuess.charAt(i);
 
-            if (match == 12) { // If all characters match the secret key
-                System.out.println("I found the secret key, it's: " + currentGuess); // Print the secret key
-                break; // Exit the loop
-            }
+        // Replace the character at the specified index with the next possible character
+        replaceChar(currentGuessArray, possible, i, index);
 
-            if (match > oldMatch) { // If the number of matching characters has increased
-                oldMatch = match; // Update the old match value
-                i++; // Move to the next character
-            } else if (match < oldMatch) { // If the number of matching characters has decreased
-                currentGuessArray[i] = currentChar; // Restore the original character at index i
-                i++; // Move to the next character
-            } else { // If the number of matching characters has remained the same
-                if (index < 4) { // If the index value is less than 4
-                    index++; // Increment the index value
-                } else { // If the index value is equal to 4
-                    index = 1; // Reset the index value to 1
-                }
-                replaceChar(currentGuessArray, possible, i, index); // Replace the current character with a possible
-                                                                    // character at index i and updated index value
+        // Update the current guess string with the modified character array
+        currentGuess = String.valueOf(currentGuessArray);
+
+        // Print the current guess for feedback
+        System.out.println("Guessing... " + currentGuess);
+
+        // Make a guess with the updated current guess and store the number of matches
+        match = key.guess(currentGuess);
+
+        // Restore the original character at the specified index
+        replaceChar(currentGuessArray, possible, i, index);
+
+        // Perform a check for the current guess
+        checkMatch(currentGuess, match, key);
+
+        // Compare the number of matches with the previous number of matches
+        if (match > oldMatch) {
+            // If the number of matches has increased, move to the next character
+            oldMatch = match;
+            i++;
+        } else if (match < oldMatch) {
+            // If the number of matches has decreased, restore the original character and move to the next character
+            currentGuessArray[i] = currentChar;
+            i++;
+        } else {
+            // If the number of matches is the same, increment the index for replacing characters
+            if (index < 4) {
+                index++;
+            } else {
+                // Reset the index if it reaches the maximum possible value
+                index = 1;
             }
         }
     }
+}
 
-    /**
-     * Replaces a character in the replaceCharHere array with a character from the
-     * takeCharFromHere array.
-     * 
-     * @param replaceCharHere  - The array in which the character needs to be
-     *                         replaced.
-     * @param takeCharFromHere - The array from which the replacement character
-     *                         needs to be taken.
-     * @param i                - The index of the character to be replaced in the
-     *                         replaceCharHere array.
-     * @param i2               - The index of the character to be taken from the
-     *                         takeCharFromHere array.
-     */
-    public void replaceChar(char[] replaceCharHere, char[] takeCharFromHere, int i, int i2) {
-        // Check if i2 is greater than 4
-        if (i2 > 4) {
-            // If i2 is greater than 4, set it to 1
-            i2 = 1;
-        }
-        // Replace the character at index i in the replaceCharHere array with the
-        // character at index i2 in the takeCharFromHere array
+    // Function to replace a character in an array
+    private void replaceChar(char[] replaceCharHere, char[] takeCharFromHere, int i, int i2) {
+        // Assign the character from takeCharFromHere at index i2 to the replaceCharHere
+        // array at index i
         replaceCharHere[i] = takeCharFromHere[i2];
+    }
+
+    // Function handle matching characters at the beginning
+    private void checkMatch(String currentGuess, int match, SecretKey key) {
+        int count_length = 0;
+
+        // If all characters match, print the secret key and exit
+        if (match == 12) {
+            System.out.println("I found the secret key! It's: " + currentGuess);
+            System.exit(0);
+        }
+
+        // If no characters match, try a few predefined guesses
+        if (match == 0) {
+            String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA" };
+            int local_match = 0, total_match = 0;
+
+            // Iterate through each predefined guess
+            for (String x : guesses) {
+                count_length++;
+
+                // Check how many characters match with the secret key
+                local_match = key.guess(x);
+                total_match += total_match;
+
+                // If all characters match, print the secret key and exit
+                if (local_match == 12) {
+                    System.out.println("I found the secret key, its: " + x);
+                    System.exit(0);
+                }
+
+                // If all predefined guesses have been checked and none match, print an error
+                // message and exit
+                if (count_length == 4) {
+                    System.out.println("Error with input");
+                    System.exit(0);
+                }
+            }
+        }
+
+        // If some characters match, print an error message and exit
+        if (match < 0) {
+            System.out.println("Secret key has insufficient/wrong characters!");
+            System.exit(0);
+        }
     }
 }
