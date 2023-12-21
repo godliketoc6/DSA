@@ -1,12 +1,10 @@
-
-
 public class SecretKey {
     private String correctKey;
     private int counter;
 
     public SecretKey() {
         // for the real test, your program will not know this
-        correctKey = "OAOCHMHHMCOA";
+        correctKey = "MOCHMOCHMOCH";
         counter = 0;
     }
 
