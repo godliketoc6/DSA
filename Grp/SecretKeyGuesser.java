@@ -83,17 +83,4 @@ public class SecretKeyGuesser {
         // character at index i2 in the takeCharFromHere array
         replaceCharHere[i] = takeCharFromHere[i2];
     }
-
-    /**
-     * Checks if the match value equals 12.
-     * If match is 12, prints the secret key.
-     *
-     * @param currentGuess the current guess
-     * @param match        the match value
-     */
-    public void checkMatch(String currentGuess, int match) {
-        if (match == 12) {
-            System.out.println("I found the secret key! It's: " + currentGuess);
-        }
-    }
 }
