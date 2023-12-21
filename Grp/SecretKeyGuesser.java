@@ -1,22 +1,12 @@
 public class SecretKeyGuesser {
-/**
- * Start the guessing process for the secret key.
- */
 public void start() {
-    // Set the possible characters for the secret key
     char[] possible = { 'M', 'O', 'C', 'H', 'A' };
-
-    // Initialize the index for replacing characters in the current guess
     int index = 1;
-
-    // Create a new instance of the SecretKey class
     SecretKey key = new SecretKey();
-
-    // Initialize the current guess string with all 'M' characters
     String currentGuess = "MMMMMMMMMMMM";
 
     // Make an initial guess and store the number of matches
-    int match = key.guess(currentGuess);
+    int match = key.guess(currentGuess); //1
 
     // Store the initial number of matches for reference
     int oldMatch = match;
@@ -93,7 +83,7 @@ public void start() {
 
         // If no characters match, try a few predefined guesses
         if (match == 0) {
-            String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA" };
+            String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA", "MMMMMMMMMMMM" };
             int local_match = 0, total_match = 0;
 
             // Iterate through each predefined guess
@@ -101,7 +91,7 @@ public void start() {
                 count_length++;
 
                 // Check how many characters match with the secret key
-                local_match = key.guess(x);
+                local_match = key.guess(x); //2
                 total_match += total_match;
 
                 // If all characters match, print the secret key and exit
@@ -112,7 +102,7 @@ public void start() {
 
                 // If all predefined guesses have been checked and none match, print an error
                 // message and exit
-                if (count_length == 4) {
+                if (count_length == 5) {
                     System.out.println("Error with input");
                     System.exit(0);
                 }
