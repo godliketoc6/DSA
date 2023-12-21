@@ -73,6 +73,8 @@ public class SecretKeyGuesser {
                 }
                 replaceChar(currentGuessArray, possibleCharacters, i, index);
             }
+
+            System.out.println("Guessing... " + currentGuess);
         }
     }
 
