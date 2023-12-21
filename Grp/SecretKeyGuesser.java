@@ -7,9 +7,6 @@ public class SecretKeyGuesser {
 public void start() {
     char[] possible = { 'M', 'O', 'C', 'H', 'A' }; // Define the possible characters for the secret key
     int index = 1; // Initialize the index for replacing characters in the current guess
-
-    System.out.println("Index before function: " + index); // Print the initial index value
-
     SecretKey key = new SecretKey(); // Create an instance of the SecretKey class
     String currentGuess = "MMMMMMMMMMMM"; // Initialize the current guess
     int match = key.guess(currentGuess); // Make a guess and get the number of characters that match the secret key
