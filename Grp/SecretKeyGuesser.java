@@ -1,9 +1,9 @@
 public class SecretKeyGuesser {
     public void start() {
-        char[] possible = { 'M', 'O', 'C', 'H', 'A' };
-        int index = 1;
-        SecretKey key = new SecretKey();
-        String currentGuess = "MMMMMMMMMMMM";
+        char[] possible = { 'M', 'O', 'C', 'H', 'A' }; // Array of possible characters
+        int index = 1; // Index to track replacement of characters
+        SecretKey key = new SecretKey(); // Secret key object
+        String currentGuess = "MMMMMMMMMMMM"; // Initial guess
 
         // Make an initial guess and store the number of matches
         int match = key.guess(currentGuess); // 1
@@ -75,8 +75,6 @@ public class SecretKeyGuesser {
 
     // Refactored code to handle matching characters at the beginning
     private void checkMatch(String currentGuess, int match, SecretKey key) {
-        int count_length = 0;
-
         // Check if all characters match
         if (match == 12) {
             System.out.println("I found the secret key! It's: " + currentGuess);
@@ -89,8 +87,6 @@ public class SecretKeyGuesser {
 
             // Iterate through the predefined guesses
             for (String x : guesses) {
-                count_length++;
-
                 // Check if the guess matches any character
                 local_match = key.guess(x);
                 total_match += total_match;
@@ -102,12 +98,6 @@ public class SecretKeyGuesser {
                 // Check if the guess matches the secret key
                 else if (local_match == 12) {
                     System.out.println("I found the secret key, its: " + x);
-                    System.exit(0);
-                }
-
-                // Check if all guesses have been processed
-                if (count_length == 4) {
-                    System.out.println("Error with input");
                     System.exit(0);
                 }
             }
