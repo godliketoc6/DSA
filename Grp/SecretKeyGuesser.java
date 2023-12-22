@@ -74,7 +74,7 @@ public class SecretKeyGuesser {
     }
 
     // Refactored code to handle matching characters at the beginning
-    private void checkMatch(String currentGuess, int match, SecretKey key) {
+    private void checkMatch(String currentGuess, int match, SecretKey key) { 
         // Check if all characters match
         if (match == 12) {
             System.out.println("I found the secret key! It's: " + currentGuess);
@@ -83,13 +83,12 @@ public class SecretKeyGuesser {
         // Check if no characters match
         else if (match == 0) {
             String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA" };
-            int local_match = 0, total_match = 0;
+            int local_match = 0;
 
             // Iterate through the predefined guesses
             for (String x : guesses) {
                 // Check if the guess matches any character
                 local_match = key.guess(x);
-                total_match += total_match;
 
                 // Check if the guess partially matches the secret key
                 if (local_match < 12 && local_match > 0) {
