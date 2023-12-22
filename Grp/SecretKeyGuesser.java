@@ -83,7 +83,7 @@ public void start() {
 
         // If no characters match, try a few predefined guesses
         if (match == 0) {
-            String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA", "MMMMMMMMMMMM" };
+            String[] guesses = { "OOOOOOOOOOOO", "CCCCCCCCCCCC", "HHHHHHHHHHHH", "AAAAAAAAAAAA" };
             int local_match = 0, total_match = 0;
 
             // Iterate through each predefined guess
@@ -102,8 +102,8 @@ public void start() {
 
                 // If all predefined guesses have been checked and none match, print an error
                 // message and exit
-                if (count_length == 5) {
-                    System.out.println("Error with input");
+                if (count_length == 4) {
+                    System.out.println("Error with secret key!");
                     System.exit(0);
                 }
             }
