@@ -37,9 +37,6 @@ public class SecretKeyGuesser {
             // Make a guess with the updated current guess and store the number of matches
             match = key.guess(currentGuess);
 
-            // Restore the original character at the specified index
-            replaceChar(currentGuessArray, possible, i, index);
-
             // Perform a check for the current guess
             checkMatch(currentGuess, match, key);
 
